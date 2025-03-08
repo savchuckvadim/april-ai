@@ -19,7 +19,10 @@ router = APIRouter(prefix="/ai", tags=["AI"])
 async def retrieve(query: str):
     try:
         # Настройка LLM (Ollama) и эмбеддингов
-        llm = OllamaLLM(model="mistral")
+        llm = OllamaLLM(
+            model="mistral",
+            base_url=os.getenv("OLLAMA_BASE_URL", "http://ollama:11434")
+        )
         embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-mpnet-base-v2")
 
         # Загрузка и разделение документа
