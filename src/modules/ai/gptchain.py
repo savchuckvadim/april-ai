@@ -21,7 +21,7 @@ async def retrieve(query: str):
         # Настройка LLM (Ollama) и эмбеддингов
         llm = OllamaLLM(
             model="mistral",
-            base_url=os.getenv("OLLAMA_BASE_URL", "http://ollama:11434")
+            base_url=os.getenv("OLLAMA_BASE_URL", "http://host.docker.internal:11434")
         )
         embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-mpnet-base-v2")
 
