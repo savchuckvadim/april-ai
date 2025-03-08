@@ -1,15 +1,24 @@
-version: "3.3"  # Убедитесь, что версия поддерживается вашей версией Docker Compose
+version: '3.8'
 
 services:
+  ollama:
+    image: ollama/ollama
+    container_name: ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    restart: always
 
-  helper:
-      container_name: "helper"
-      image: helper
-      build:
-        context: .
-        dockerfile: Dockerfile
-      volumes:
-      - .:/var/www/html  
-      ports:
-        - "8089:8000"
-      restart: unless-stopped
+  fastapi:
+    build: .
+    container_name: fastapi
+    depends_on:
+      - ollama
+    environment:
+      - OLLAMA_BASE_URL=http://ollama:11434
+    ports:
+      - "8000:8000"
+
+volumes:
+  ollama_data:
