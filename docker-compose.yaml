@@ -1,16 +1,16 @@
 version: '3.8'
 
 services:
-  ollama:
-    image: ollama/ollama
-    container_name: ollama
-    ports:
-      - "11434:11434"
-    volumes:
-      - ollama_data:/root/.ollama
-    restart: always
-    command: ["serve"]
-    entrypoint: ["/bin/sh", "-c", "ollama pull mistral && ollama serve"]
+  # ollama:
+  #   image: ollama/ollama
+  #   container_name: ollama
+  #   ports:
+  #     - "11434:11434"
+  #   volumes:
+  #     - ollama_data:/root/.ollama
+  #   restart: always
+  #   command: ["serve"]
+  #   entrypoint: ["/bin/sh", "-c", "ollama pull mistral && ollama serve"]
 
 
   fastapi:
